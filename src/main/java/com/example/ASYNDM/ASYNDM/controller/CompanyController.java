@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CompanyController {
     @GetMapping("/company")
     public String company() {
-        return "company";
+        return "company/company";
     }
+    @GetMapping("/company/add")
+    public String companyAdd() {
+        return "company/company-add";
+    }
+
 }

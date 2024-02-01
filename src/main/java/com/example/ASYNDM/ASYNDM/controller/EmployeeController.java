@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class EmployeeController {
     @GetMapping("/employee")
     public String employee() {
-        return "employee";
+        return "employee/employee";
     }
 }
