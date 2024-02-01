@@ -11,33 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 
-@Builder
-@AllArgsConstructor
+
 @Service
-public class UserService {
+public interface UserService {
+    public User createUser(User user);
 
-    private final UserRepository repository;
-
-    public String userRegistration(UserRegistrationDto userRegistrationDto) {
-
-        User user = new User();
-        user.setContact(userRegistrationDto.getContact());
-        user.setEmail(userRegistrationDto.getEmail());
-        user.setName(userRegistrationDto.getName());
-        user.setPassword(userRegistrationDto.getPassword());
-
-        repository.save(user);
-
-        return "User Registration Successfully.";
-    }
-
-    public String validateUser(String email, String pwd) {
-        User users = repository.findByEmailAndPassword(email, pwd);
-
-        if (Objects.isNull(users)) {
-            return "Invalid Credentials. Please Try again";
-        } else {
-            return "Welcome to Site, " + email;
-        }
-    }
+    public boolean checkedEmail(String email);
 }

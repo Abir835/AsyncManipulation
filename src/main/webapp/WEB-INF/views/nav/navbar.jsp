@@ -12,8 +12,8 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="/registration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+      <li><a href="/signin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li th:if="${loggedIn}"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
     </ul>
   </div>
 </nav>

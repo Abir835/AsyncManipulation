@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../base.jsp" %>
 <div class="container mt-5">
-    <form action="user/register" method="POST">
+    <h1>Registration Form</h1>
+    <form action="/createUser" method="POST">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Name</label>
@@ -16,8 +17,8 @@
                 <input type="contact" name="contact" class="form-control" id="contact" placeholder="contact">
             </div>
             <div class="form-group col-md-6">
-                <label for="inputPassword4">Password</label>
-                <input type="password" name="pwd" class="form-control" id="inputPassword4" placeholder="Password">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
             </div>
         </div>
 

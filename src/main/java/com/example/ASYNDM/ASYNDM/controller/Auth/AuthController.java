@@ -1,12 +1,13 @@
 package com.example.ASYNDM.ASYNDM.controller.Auth;
 
 import com.example.ASYNDM.ASYNDM.dto.UserRegistrationDto;
+import com.example.ASYNDM.ASYNDM.entity.User;
 import com.example.ASYNDM.ASYNDM.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,11 +18,9 @@ public class AuthController {
 
     private final UserService userService;
 
-    @GetMapping("login")
-    public ModelAndView loadLoginPage() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("auth/login");
-        return modelAndView;
+    @GetMapping("/signin")
+    public String  login(){
+        return "auth/login";
     }
     @GetMapping("/registration")
     public String registration() {
@@ -32,29 +31,25 @@ public class AuthController {
         return "auth/user";
     }
 
-    @PostMapping("user/register")
-    public ModelAndView registerUser(HttpServletRequest request) {
+    @PostMapping("/createUser")
+    public String createUser(@ModelAttribute User user){
+        boolean emailCheck = userService.checkedEmail(user.getEmail());
+        if(emailCheck){
+            System.out.println("Email Already Exits");
+            return "redirect:/registration";
+        }
+        else{
+            User userDetails =  userService.createUser(user);
+            if(userDetails != null){
+                System.out.println("Register Successfully");
+            }
+            else{
+                System.out.println("Something error in server");
+            }
+        }
 
-        UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
-        userRegistrationDto.setName(request.getParameter("name"));
-        userRegistrationDto.setEmail(request.getParameter("email"));
-        userRegistrationDto.setContact(request.getParameter("contact"));
-        userRegistrationDto.setPassword(request.getParameter("pwd"));
-
-        String result = userService.userRegistration(userRegistrationDto);
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("result");
-        modelAndView.addObject("message", result);
-        return modelAndView;
+        return "redirect:/signin";
     }
 
-    @PostMapping("/loginCheck")
-    public ModelAndView validateUser(HttpServletRequest request) {
-        String result = userService.validateUser(request.getParameter("email"), request.getParameter("pwd"));
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("result");
-        modelAndView.addObject("message", result);
-        return modelAndView;
-    }
+
 }
