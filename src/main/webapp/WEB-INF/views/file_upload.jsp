@@ -7,6 +7,6 @@
          enctype = "multipart/form-data">
          <input type = "file" name = "file" size = "50" />
          <br />
-         <button type="submit" class="btn btn-primary">Upload File</button>
+         <button style="background-color: #333; type="submit" class="btn btn-primary">Upload File</button>
       </form>
 </div>
