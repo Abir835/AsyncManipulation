@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "USER")
 public class User {

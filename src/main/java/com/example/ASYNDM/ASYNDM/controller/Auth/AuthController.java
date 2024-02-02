@@ -1,5 +1,6 @@
 package com.example.ASYNDM.ASYNDM.controller.Auth;
 
+import com.example.ASYNDM.ASYNDM.dto.UserListDto;
 import com.example.ASYNDM.ASYNDM.dto.UserRegistrationDto;
 import com.example.ASYNDM.ASYNDM.entity.User;
 import com.example.ASYNDM.ASYNDM.service.UserService;
@@ -32,7 +33,7 @@ public class AuthController {
 
     @GetMapping("/users")
     public String users(Model model) {
-        List<User> users = userService.findAll();
+        List<UserListDto> users = userService.findAll();
         model.addAttribute("users", users);
         return "auth/user";
     }

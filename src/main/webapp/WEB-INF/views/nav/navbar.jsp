@@ -9,7 +9,7 @@
       <li ><a href="/company">Company</a></li>
       <li ><a href="/department">Department</a></li>
       <li ><a href="/employee">Employee</a></li>
-      <li ><a href="/batch-entry">Batch Entry</a></li>
+      <li ><a href="/file-upload">File Upload</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="/registration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

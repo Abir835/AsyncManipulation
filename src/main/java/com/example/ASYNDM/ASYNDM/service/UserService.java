@@ -1,5 +1,6 @@
 package com.example.ASYNDM.ASYNDM.service;
 
+import com.example.ASYNDM.ASYNDM.dto.UserListDto;
 import com.example.ASYNDM.ASYNDM.dto.UserRegistrationDto;
 import com.example.ASYNDM.ASYNDM.entity.User;
 import com.example.ASYNDM.ASYNDM.repository.UserRepository;
@@ -18,6 +19,6 @@ public interface UserService {
 
     public boolean checkedEmail(String email);
 
-    List<User> findAll();
+    List<UserListDto> findAll();
 
 }

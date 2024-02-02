@@ -24,6 +24,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void saveBatch(CompanyRequestDto company, DepartmentRequestDto department, EmployeeRequestDto employee) throws JsonProcessingException {
+
         LogTableDto logTableDto = new LogTableDto();
         ObjectMapper objectMapper = new ObjectMapper();
 

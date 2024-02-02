@@ -12,12 +12,12 @@
       </tr>
     </thead>
     <tbody>
-        <c:forEach items="${users}" var="user">
+        <c:forEach items="${users}" var="userListDto">
             <tr>
-                <td>${user.id}</td>
-                <td>${user.name}</td>
-                <td>${user.email}</td>
-                <td>${user.contact}</td>
+                <td>${userListDto.id != null ? userListDto.id : 'N/A'}</td>
+                <td>${userListDto.name != null ? userListDto.name : 'N/A'}</td>
+                <td>${userListDto.email != null ? userListDto.email : 'N/A'}</td>
+                <td>${userListDto.contact != null ? userListDto.contact : 'N/A'}</td>
             </tr>
         </c:forEach>
     </tbody>

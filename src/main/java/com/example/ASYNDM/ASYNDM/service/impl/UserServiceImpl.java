@@ -1,5 +1,6 @@
 package com.example.ASYNDM.ASYNDM.service.impl;
 
+import com.example.ASYNDM.ASYNDM.dto.UserListDto;
 import com.example.ASYNDM.ASYNDM.entity.User;
 import com.example.ASYNDM.ASYNDM.repository.UserRepository;
 import com.example.ASYNDM.ASYNDM.service.UserService;
@@ -10,6 +11,7 @@ import lombok.Setter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -35,8 +37,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
+    public List<UserListDto> findAll() {
+        List<User> users = userRepository.findAll();
+        List<UserListDto> userListDto = new ArrayList<>();
 
-        return userRepository.findAll();
+        for (User user : users) {
+            UserListDto userDto = new UserListDto();
+            userDto.setId(user.getId());
+            userDto.setName(user.getName());
+            userDto.setEmail(user.getEmail());
+            userDto.setContact(user.getContact());
+            userListDto.add(userDto);
+        }
+        return userListDto;
     }
+
 }
