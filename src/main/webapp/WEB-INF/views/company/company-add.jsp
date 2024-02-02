@@ -2,72 +2,56 @@
 <%@ include file="../base.jsp" %>
 <div class="container mt-5">
    <div class="d-flex align-items-center justify-content-between">
-    <form class="col-4" action="user/register" method="POST">
+    <form class="" action="/create-batch" method="POST">
+           <h2>Company </h2>
            <div class="form-row">
-               <div class="form-group col-md-6">
-                   <label for="name">Name</label>
-                   <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+              <div class="">
+                  <label for="companyName">Company Name</label>
+                  <input type="text" name="companyName" class="form-control" id="companyName" placeholder="Company Name">
+              </div>
+               <div class="">
+                   <label for="companyEmail">Company Email</label>
+                   <input type="text" name="companyEmail" class="form-control" id="companyEmail" placeholder="Company Email">
                 </div>
-               <div class="form-group col-md-6">
-                   <label for="inputEmail4">Email</label>
-                   <input type="text" name="email" class="form-control" id="inputEmail4" placeholder="Email">
-               </div>
-               <div class="form-group col-md-6">
-                   <label for="contact">Contact</label>
-                   <input type="contact" name="contact" class="form-control" id="contact" placeholder="contact">
-               </div>
-               <div class="form-group col-md-6">
-                   <label for="inputPassword4">Password</label>
-                   <input type="password" name="pwd" class="form-control" id="inputPassword4" placeholder="Password">
+               <div class="">
+                   <label for="companyContact">Company Contact</label>
+                   <input type="text" name="companyContact" class="form-control" id="companyContact" placeholder="Company Contact">
                </div>
            </div>
+           </br>
 
-           <button type="submit" class="btn btn-primary">Sign Up</button>
-       </form>
-           <form action="user/register" method="POST">
-               <div class="form-row">
-                   <div class="form-group col-md-6">
-                       <label for="name">Name</label>
-                       <input type="text" name="name" class="form-control" id="name" placeholder="Name">
-                    </div>
-                   <div class="form-group col-md-6">
-                       <label for="inputEmail4">Email</label>
-                       <input type="text" name="email" class="form-control" id="inputEmail4" placeholder="Email">
-                   </div>
-                   <div class="form-group col-md-6">
-                       <label for="contact">Contact</label>
-                       <input type="contact" name="contact" class="form-control" id="contact" placeholder="contact">
-                   </div>
-                   <div class="form-group col-md-6">
-                       <label for="inputPassword4">Password</label>
-                       <input type="password" name="pwd" class="form-control" id="inputPassword4" placeholder="Password">
-                   </div>
+           <div class="">
+             <h2>Department</h2>
+             <div class="">
+                 <label for="departmentName">Department Name</label>
+                 <input type="text" name="departmentName" class="form-control" id="departmentName" placeholder="Department Name">
+             </div>
+              <div class="">
+                  <label for="departmentPrefix">Department Prefix</label>
+                  <input type="text" name="departmentPrefix" class="form-control" id="departmentPrefix" placeholder="Department Prefix">
                </div>
 
-               <button type="submit" class="btn btn-primary">Sign Up</button>
-           </form>
-               <form action="user/register" method="POST">
-                   <div class="form-row">
-                       <div class="form-group col-md-6">
-                           <label for="name">Name</label>
-                           <input type="text" name="name" class="form-control" id="name" placeholder="Name">
-                        </div>
-                       <div class="form-group col-md-6">
-                           <label for="inputEmail4">Email</label>
-                           <input type="text" name="email" class="form-control" id="inputEmail4" placeholder="Email">
-                       </div>
-                       <div class="form-group col-md-6">
-                           <label for="contact">Contact</label>
-                           <input type="contact" name="contact" class="form-control" id="contact" placeholder="contact">
-                       </div>
-                       <div class="form-group col-md-6">
-                           <label for="inputPassword4">Password</label>
-                           <input type="password" name="pwd" class="form-control" id="inputPassword4" placeholder="Password">
-                       </div>
+            </div>
+
+            <div class="">
+                 <h2>Employee</h2>
+                 <div class="">
+                     <label for="employeeName">Employee Name</label>
+                     <input type="text" name="employeeName" class="form-control" id="employeeName" placeholder="Employee Name">
+                 </div>
+                  <div class="">
+                      <label for="employeeContact">Employee Contact</label>
+                      <input type="text" name="employeeContact" class="form-control" id="employeeContact" placeholder="Employee Contact">
                    </div>
 
-                   <button type="submit" class="btn btn-primary">Sign Up</button>
-               </form>
+                   <div class="">
+                      <label for="employeeEmail">Employee Email</label>
+                      <input type="text" name="employeeEmail" class="form-control" id="employeeEmail" placeholder="Employee Email">
+                   </div>
+
+            </div>
+            </br>
+           <button type="submit" class="btn btn-primary">Create</button>
    </div>
 </div>
 
