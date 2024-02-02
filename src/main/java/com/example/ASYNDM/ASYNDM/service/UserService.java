@@ -17,4 +17,7 @@ public interface UserService {
     public User createUser(User user);
 
     public boolean checkedEmail(String email);
+
+    List<User> findAll();
+
 }

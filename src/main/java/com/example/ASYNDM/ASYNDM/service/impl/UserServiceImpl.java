@@ -10,6 +10,8 @@ import lombok.Setter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Builder
 @Setter
 @Getter
@@ -30,5 +32,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkedEmail(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public List<User> findAll() {
+
+        return userRepository.findAll();
     }
 }

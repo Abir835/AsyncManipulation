@@ -5,27 +5,21 @@
   <table class="table table-hover">
     <thead style="background: #dfdfdf">
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
+        <th>Id</th>
+        <th>User Name</th>
         <th>Email</th>
+        <th>Contact</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
+        <c:forEach items="${users}" var="user">
+            <tr>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.contact}</td>
+            </tr>
+        </c:forEach>
     </tbody>
   </table>
 </div>

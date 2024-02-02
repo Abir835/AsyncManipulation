@@ -6,10 +6,13 @@ import com.example.ASYNDM.ASYNDM.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -17,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class AuthController {
 
     private final UserService userService;
+
 
     @GetMapping("/signin")
     public String  login(){
@@ -26,8 +30,11 @@ public class AuthController {
     public String registration() {
         return "auth/registration";
     }
+
     @GetMapping("/users")
-    public String users() {
+    public String users(Model model) {
+        List<User> users = userService.findAll();
+        model.addAttribute("users", users);
         return "auth/user";
     }
 
