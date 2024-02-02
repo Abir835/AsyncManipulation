@@ -12,6 +12,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
+import java.util.UUID;
+
 @AllArgsConstructor
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -23,6 +26,10 @@ public class CompanyServiceImpl implements CompanyService {
     public void saveBatch(CompanyRequestDto company, DepartmentRequestDto department, EmployeeRequestDto employee) throws JsonProcessingException {
         LogTableDto logTableDto = new LogTableDto();
         ObjectMapper objectMapper = new ObjectMapper();
+
+        company.setCompanyIdentifier(UUID.randomUUID().toString());
+        department.setDepartmentIdentifier(UUID.randomUUID().toString());
+        employee.setEmployeeIdentifier(UUID.randomUUID().toString());
 
         logTableDto.setCompany(objectMapper.writeValueAsString(company));
         logTableDto.setEmployee(objectMapper.writeValueAsString(employee));
