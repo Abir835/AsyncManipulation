@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:mysql://localhost:3306/asynsdb?createDatabaseIfNotExist=true
+    username:
+    password:
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
