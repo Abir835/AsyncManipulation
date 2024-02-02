@@ -21,7 +21,7 @@ public class BatchEntryController {
 
     @GetMapping("/batch-entry")
     public String batchEntry() throws JsonProcessingException {
-        batchEntryService.AddCompanyDeptEmployee();
+//        batchEntryService.AddCompanyDeptEmployee();
         return "redirect:/";
     }
 

@@ -13,11 +13,18 @@ import com.example.ASYNDM.ASYNDM.service.BatchEntryService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class BatchEntryServiceImpl implements BatchEntryService {
@@ -25,12 +32,11 @@ public class BatchEntryServiceImpl implements BatchEntryService {
     private final LogTableRepository logTableRepository;
     private final CompanyRepository companyRepository;
 
+
     @Override
-    public void AddCompanyDeptEmployee() throws JsonProcessingException {
+    public void addCompanyDeptEmployee(List<LogTable> logTableList) throws JsonProcessingException {
 
-        List<LogTable> logTables = logTableRepository.findAllByStatus(0);
-
-        for (LogTable logTable: logTables){
+        for (LogTable logTable : logTableList) {
             List<Employee> employeeList = new ArrayList<>();
             List<Department> departmentList = new ArrayList<>();
 
@@ -67,6 +73,54 @@ public class BatchEntryServiceImpl implements BatchEntryService {
         }
     }
 
+    @Scheduled(cron = "0 * * * * ?")
+    @Override
+    public void runScheduler() {
+        List<LogTable> logTables = logTableRepository.findAllByStatus(0);
+        if (CollectionUtils.isEmpty(logTables)) {
+            return;
+        }
+        executeJob(logTables);
+
+    }
+
+    @Override
+    public void executeJob(List<LogTable> logTableList) {
+
+        final int totalSize = logTableList.size();
+        final int batchSize = (totalSize + 4) / 5;
+        final int requiredPoolSize = 5;
+        final CountDownLatch latch = new CountDownLatch(requiredPoolSize);
+
+        log.trace("Transaction Sync .executeScheduler #Pool size: " + (requiredPoolSize));
+
+        final ExecutorService executorService = Executors.newFixedThreadPool(requiredPoolSize);
+
+        try {
+            executorService.execute(() -> {
+                try {
+                    log.info("execute");
+                    for (int i = 0; i < totalSize; i += batchSize) {
+                        int toIndex = Math.min(i + batchSize, totalSize);
+                        List<LogTable> segment = logTableList.subList(i, toIndex);
+                        log.info("segmentSize Calculate "+ segment.size());
+                        addCompanyDeptEmployee(segment);
+                    }
+
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                } finally {
+                    log.info("segmentSize in finally block");
+                    latch.countDown();
+                }
+            });
+
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+        } finally {
+            executorService.shutdown();
+        }
+    }
 
 
 }
