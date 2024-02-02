@@ -3,6 +3,7 @@ package com.example.ASYNDM.ASYNDM.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -10,7 +11,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "COMPANY")
-public class Company {
+public class Company implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
