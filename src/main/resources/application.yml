@@ -5,8 +5,8 @@ spring:
       ddl-auto: none
   datasource:
     url: jdbc:mysql://localhost:3306/asynsdb?createDatabaseIfNotExist=true
-    username:
-    password:
+    username: root
+    password: Abir@123
     driverClassName: com.mysql.cj.jdbc.Driver
 
   mvc:
