@@ -5,27 +5,22 @@
   <table class="table table-hover">
     <thead style="background: #dfdfdf">
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Contact</th>
         <th>Email</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
-    </tbody>
+            <c:forEach items="${employee}" var="emp">
+                <tr>
+                    <td>${emp.id != null ? emp.id : 'N/A'}</td>
+                    <td>${emp.employeeName != null ? emp.employeeName : 'N/A'}</td>
+                    <td>${emp.employeeContact != null ? emp.employeeContact : 'N/A'}</td>
+                    <td>${emp.employeeEmail != null ? emp.employeeEmail : 'N/A'}</td>
+
+                </tr>
+            </c:forEach>
+        </tbody>
   </table>
 </div>

@@ -1,10 +1,10 @@
 package com.example.ASYNDM.ASYNDM.service.impl;
 
-import com.example.ASYNDM.ASYNDM.dto.CompanyRequestDto;
-import com.example.ASYNDM.ASYNDM.dto.DepartmentRequestDto;
-import com.example.ASYNDM.ASYNDM.dto.EmployeeRequestDto;
-import com.example.ASYNDM.ASYNDM.dto.LogTableDto;
+import com.example.ASYNDM.ASYNDM.dto.*;
+import com.example.ASYNDM.ASYNDM.entity.Company;
 import com.example.ASYNDM.ASYNDM.entity.LogTable;
+import com.example.ASYNDM.ASYNDM.entity.User;
+import com.example.ASYNDM.ASYNDM.repository.CompanyRepository;
 import com.example.ASYNDM.ASYNDM.repository.LogTableRepository;
 import com.example.ASYNDM.ASYNDM.service.CompanyService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,6 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -20,6 +22,7 @@ import java.util.UUID;
 public class CompanyServiceImpl implements CompanyService {
 
     private final LogTableRepository logTableRepository;
+    private final CompanyRepository companyRepository;
 
 
     @Override
@@ -44,6 +47,22 @@ public class CompanyServiceImpl implements CompanyService {
         logTable.setStatus(0);
 
         logTableRepository.save(logTable);
+    }
+
+    @Override
+    public List<CompanyResponseDto> findAll() {
+        List<Company> companyList = companyRepository.findAll();
+        List<CompanyResponseDto> companyResponseDto = new ArrayList<>();
+
+        for (Company company : companyList) {
+            CompanyResponseDto dto = new CompanyResponseDto();
+            dto.setId(company.getId());
+            dto.setCompanyName(company.getCompanyName());
+            dto.setCompanyContact(company.getCompanyContact());
+            dto.setCompanyEmail(company.getCompanyEmail());
+            companyResponseDto.add(dto);
+        }
+        return companyResponseDto;
     }
 
 

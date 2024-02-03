@@ -9,28 +9,22 @@
   <table class="table table-hover">
     <thead style="background: #dfdfdf">
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
+        <th>Id</th>
+        <th>Name</th>
         <th>Email</th>
+        <th>Contact</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
-    </tbody>
+            <c:forEach items="${company}" var="cmp">
+                <tr>
+                    <td>${cmp.id != null ? cmp.id : 'N/A'}</td>
+                    <td>${cmp.companyName != null ? cmp.companyName : 'N/A'}</td>
+                    <td>${cmp.companyEmail != null ? cmp.companyEmail : 'N/A'}</td>
+                    <td>${cmp.companyContact != null ? cmp.companyContact : 'N/A'}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
   </table>
 </div>
 

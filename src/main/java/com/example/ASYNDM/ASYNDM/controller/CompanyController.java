@@ -1,6 +1,7 @@
 package com.example.ASYNDM.ASYNDM.controller;
 
 import com.example.ASYNDM.ASYNDM.dto.CompanyRequestDto;
+import com.example.ASYNDM.ASYNDM.dto.CompanyResponseDto;
 import com.example.ASYNDM.ASYNDM.dto.DepartmentRequestDto;
 import com.example.ASYNDM.ASYNDM.dto.EmployeeRequestDto;
 import com.example.ASYNDM.ASYNDM.entity.Company;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class CompanyController {
@@ -23,7 +26,9 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @GetMapping("/company")
-    public String company() {
+    public String company(Model model) {
+        List<CompanyResponseDto> companyList = companyService.findAll();
+        model.addAttribute("company",companyList);
         return "company/company";
     }
     @GetMapping("/company/add")
