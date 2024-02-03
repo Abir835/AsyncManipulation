@@ -15,16 +15,17 @@
         <th>Contact</th>
       </tr>
     </thead>
-    <tbody>
-            <c:forEach items="${company}" var="cmp">
-                <tr>
-                    <td>${cmp.id != null ? cmp.id : 'N/A'}</td>
-                    <td>${cmp.companyName != null ? cmp.companyName : 'N/A'}</td>
-                    <td>${cmp.companyEmail != null ? cmp.companyEmail : 'N/A'}</td>
-                    <td>${cmp.companyContact != null ? cmp.companyContact : 'N/A'}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
+   <tbody>
+       <c:forEach items="${companyList}" var="cmp">
+           <tr>
+               <td>${cmp.id != null ? cmp.id : 'N/A'}</td>
+               <td>${cmp.companyName != null ? cmp.companyName : 'N/A'}</td>
+               <td>${cmp.companyEmail != null ? cmp.companyEmail : 'N/A'}</td>
+               <td>${cmp.companyContact != null ? cmp.companyContact : 'N/A'}</td>
+           </tr>
+       </c:forEach>
+   </tbody>
+
   </table>
 </div>
 

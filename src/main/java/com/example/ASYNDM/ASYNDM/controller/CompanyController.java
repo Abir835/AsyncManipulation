@@ -28,7 +28,7 @@ public class CompanyController {
     @GetMapping("/company")
     public String company(Model model) {
         List<CompanyResponseDto> companyList = companyService.findAll();
-        model.addAttribute("company",companyList);
+        model.addAttribute("companyList",companyList);
         return "company/company";
     }
     @GetMapping("/company/add")

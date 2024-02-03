@@ -2,6 +2,7 @@ package com.example.ASYNDM.ASYNDM.service.impl;
 
 import com.example.ASYNDM.ASYNDM.dto.UserListDto;
 import com.example.ASYNDM.ASYNDM.entity.User;
+import com.example.ASYNDM.ASYNDM.mapper.UserMapper;
 import com.example.ASYNDM.ASYNDM.repository.UserRepository;
 import com.example.ASYNDM.ASYNDM.service.UserService;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Builder
 @Setter
@@ -22,6 +24,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     private final BCryptPasswordEncoder encoderPassword;
     @Override
@@ -39,17 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserListDto> findAll() {
         List<User> users = userRepository.findAll();
-        List<UserListDto> userListDto = new ArrayList<>();
-
-        for (User user : users) {
-            UserListDto userDto = new UserListDto();
-            userDto.setId(user.getId());
-            userDto.setName(user.getName());
-            userDto.setEmail(user.getEmail());
-            userDto.setContact(user.getContact());
-            userListDto.add(userDto);
-        }
-        return userListDto;
+        return users.stream().map(userMapper::entityToDto).collect(Collectors.toList());
     }
 
 }

@@ -4,6 +4,7 @@ import com.example.ASYNDM.ASYNDM.dto.*;
 import com.example.ASYNDM.ASYNDM.entity.Company;
 import com.example.ASYNDM.ASYNDM.entity.LogTable;
 import com.example.ASYNDM.ASYNDM.entity.User;
+import com.example.ASYNDM.ASYNDM.mapper.CompanyMapper;
 import com.example.ASYNDM.ASYNDM.repository.CompanyRepository;
 import com.example.ASYNDM.ASYNDM.repository.LogTableRepository;
 import com.example.ASYNDM.ASYNDM.service.CompanyService;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -23,6 +25,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     private final LogTableRepository logTableRepository;
     private final CompanyRepository companyRepository;
+    private final CompanyMapper companyMapper;
 
 
     @Override
@@ -52,17 +55,10 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<CompanyResponseDto> findAll() {
         List<Company> companyList = companyRepository.findAll();
-        List<CompanyResponseDto> companyResponseDto = new ArrayList<>();
-
-        for (Company company : companyList) {
-            CompanyResponseDto dto = new CompanyResponseDto();
-            dto.setId(company.getId());
-            dto.setCompanyName(company.getCompanyName());
-            dto.setCompanyContact(company.getCompanyContact());
-            dto.setCompanyEmail(company.getCompanyEmail());
-            companyResponseDto.add(dto);
-        }
-        return companyResponseDto;
+        return
+                companyList.stream()
+                        .map(companyMapper::entityToDto)
+                        .collect(Collectors.toList());
     }
 
 
