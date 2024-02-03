@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -15,9 +16,11 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping("/employee")
-    public String employee(Model model) {
+    public String employee(Model model, Principal principal) {
         List<EmployeeResponseDto> dto = employeeService.findAll();
         model.addAttribute("employee", dto);
+        boolean loggedIn = (principal != null);
+        model.addAttribute("loggedIn", loggedIn);
         return "employee/employee";
     }
 }

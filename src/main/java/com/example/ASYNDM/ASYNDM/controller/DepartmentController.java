@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -14,7 +15,9 @@ import java.util.List;
 public class DepartmentController {
     private final DepartmentService departmentService;
     @GetMapping("/department")
-    public String department(Model model) {
+    public String department(Model model,  Principal principal) {
+        boolean loggedIn = (principal != null);
+        model.addAttribute("loggedIn", loggedIn);
         List<DepartmentResponseDto> dto = departmentService.findAll();
         model.addAttribute("department",dto);
         return "department/department";

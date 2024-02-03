@@ -1,7 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ include file="../base.jsp" %>
 <div class="container mt-5" style="width:550px">
     <h1 style="text-align:center">Registration Form</h1>
+    <c:if test="${not empty sessionScope.registrationMessage}">
+        <div class="alert alert-info">
+            ${sessionScope.registrationMessage}
+        </div>
+        <%-- Clear the message from the session after displaying it --%>
+        <c:set var="sessionScope.registrationMessage" value="" scope="session"/>
+     </c:if>
     <form action="/createUser" method="POST">
         <div class="form-row">
             <div class="form-group col-md-12">

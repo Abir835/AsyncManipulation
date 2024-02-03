@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 
 @Builder
@@ -32,26 +34,28 @@ public class AuthController {
     }
 
     @GetMapping("/users")
-    public String users(Model model) {
+    public String users(Model model, Principal principal) {
         List<UserListDto> users = userService.findAll();
         model.addAttribute("users", users);
+        boolean loggedIn = (principal != null);
+        model.addAttribute("loggedIn", loggedIn);
         return "auth/user";
     }
 
     @PostMapping("/createUser")
-    public String createUser(@ModelAttribute User user){
+    public String createUser(@ModelAttribute User user, HttpSession session){
         boolean emailCheck = userService.checkedEmail(user.getEmail());
         if(emailCheck){
-            System.out.println("Email Already Exits");
+            session.setAttribute("registrationMessage", "Email already exists. Please choose a different email.");
             return "redirect:/registration";
         }
         else{
             User userDetails =  userService.createUser(user);
             if(userDetails != null){
-                System.out.println("Register Successfully");
+                session.setAttribute("registrationMessage", "Registration successful. You can now sign in.");
             }
             else{
-                System.out.println("Something error in server");
+                session.setAttribute("registrationMessage", "Registration failed. Please try again.");
             }
         }
 

@@ -2,6 +2,9 @@
 <%@ include file="../base.jsp" %>
 <div class="container mt-5" style="width:550px">
     <h1 style="text-align:center">Login Form</h1>
+    <c:if test="${not empty sessionScope.registrationMessage}">
+            <c:set var="sessionScope.registrationMessage" value="" scope="session"/>
+    </c:if>
     <form action="/login" method="post">
         <div class="form-row">
             <div class="form-group col-md-12">
